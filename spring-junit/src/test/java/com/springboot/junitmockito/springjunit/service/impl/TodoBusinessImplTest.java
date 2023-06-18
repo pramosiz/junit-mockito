@@ -14,6 +14,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -28,6 +29,9 @@ class TodoBusinessImplTest {
 	
 	@InjectMocks
 	TodoBusinessImpl todoBusinessImpl;
+	
+	@Captor
+	ArgumentCaptor<String> stringArgumentCaptor;
 	
 	@Test
 	void testRetrieveTodosNotRelatedToSpring() {
@@ -82,9 +86,6 @@ class TodoBusinessImplTest {
 	@Test
 	void testDeleteTodosNotRelatedToSpring_BDD_argumentCapture() {
 		
-		// Declare Argument Captor
-		ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
-		
 		// Given
 		List<String> todos = Arrays.asList("Learn Spring MVC", "Learn Spring", "Learn to dance");
 		given(todoServiceMock.retrieveTodos(anyString())).willReturn(todos);
@@ -100,9 +101,6 @@ class TodoBusinessImplTest {
 	
 	@Test
 	void testDeleteTodosNotRelatedToSpring_BDD_argumentCaptureMultipleTimes() {
-		
-		// Declare Argument Captor
-		ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
 		
 		// Given
 		List<String> todos = Arrays.asList("Learn to Rock", "Learn Spring", "Learn to dance");
