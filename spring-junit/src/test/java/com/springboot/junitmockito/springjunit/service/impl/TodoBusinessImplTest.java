@@ -1,6 +1,5 @@
 package com.springboot.junitmockito.springjunit.service.impl;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -13,18 +12,23 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.BDDMockito.Then;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.springboot.junitmockito.springjunit.service.TodoService;
 
+@ExtendWith(MockitoExtension.class)
 class TodoBusinessImplTest {
 
+	@Mock
+	TodoService todoServiceMock;
+	
 	@Test
 	void testRetrieveTodosNotRelatedToSpring() {
 		
 		// Given
-		TodoService todoServiceMock = mock(TodoService.class);
 		List<String> todos = Arrays.asList("Learn Spring MVC", "Learn Spring", "Learn to dance");
 		given(todoServiceMock.retrieveTodos(anyString())).willReturn(todos);
 		TodoBusinessImpl todoBusinessImpl = new TodoBusinessImpl(todoServiceMock);
@@ -40,7 +44,6 @@ class TodoBusinessImplTest {
 	void testDeleteTodosNotRelatedToSpring() {
 		
 		// Given
-		TodoService todoServiceMock = mock(TodoService.class);
 		List<String> todos = Arrays.asList("Learn Spring MVC", "Learn Spring", "Learn to dance");
 		given(todoServiceMock.retrieveTodos(anyString())).willReturn(todos);
 		TodoBusinessImpl todoBusinessImpl = new TodoBusinessImpl(todoServiceMock);
@@ -60,7 +63,6 @@ class TodoBusinessImplTest {
 	void testDeleteTodosNotRelatedToSpring_BDD() {
 		
 		// Given
-		TodoService todoServiceMock = mock(TodoService.class);
 		List<String> todos = Arrays.asList("Learn Spring MVC", "Learn Spring", "Learn to dance");
 		given(todoServiceMock.retrieveTodos(anyString())).willReturn(todos);
 		TodoBusinessImpl todoBusinessImpl = new TodoBusinessImpl(todoServiceMock);
@@ -83,7 +85,6 @@ class TodoBusinessImplTest {
 		ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
 		
 		// Given
-		TodoService todoServiceMock = mock(TodoService.class);
 		List<String> todos = Arrays.asList("Learn Spring MVC", "Learn Spring", "Learn to dance");
 		given(todoServiceMock.retrieveTodos(anyString())).willReturn(todos);
 		TodoBusinessImpl todoBusinessImpl = new TodoBusinessImpl(todoServiceMock);
@@ -104,7 +105,6 @@ class TodoBusinessImplTest {
 		ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
 		
 		// Given
-		TodoService todoServiceMock = mock(TodoService.class);
 		List<String> todos = Arrays.asList("Learn to Rock", "Learn Spring", "Learn to dance");
 		given(todoServiceMock.retrieveTodos(anyString())).willReturn(todos);
 		TodoBusinessImpl todoBusinessImpl = new TodoBusinessImpl(todoServiceMock);
@@ -115,7 +115,6 @@ class TodoBusinessImplTest {
 		// Then
 		then(todoServiceMock).should(times(2)).deleteTodo(stringArgumentCaptor.capture());
 		assertEquals(2, stringArgumentCaptor.getAllValues().size());
-		
 	}
 
 }
