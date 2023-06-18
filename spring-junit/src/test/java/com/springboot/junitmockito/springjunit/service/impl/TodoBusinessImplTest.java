@@ -14,6 +14,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -25,13 +26,15 @@ class TodoBusinessImplTest {
 	@Mock
 	TodoService todoServiceMock;
 	
+	@InjectMocks
+	TodoBusinessImpl todoBusinessImpl;
+	
 	@Test
 	void testRetrieveTodosNotRelatedToSpring() {
 		
 		// Given
 		List<String> todos = Arrays.asList("Learn Spring MVC", "Learn Spring", "Learn to dance");
 		given(todoServiceMock.retrieveTodos(anyString())).willReturn(todos);
-		TodoBusinessImpl todoBusinessImpl = new TodoBusinessImpl(todoServiceMock);
 		
 		// When
 		List<String> filteredTodos = todoBusinessImpl.retrieveTodosRelatedToSpring(anyString());
@@ -46,7 +49,6 @@ class TodoBusinessImplTest {
 		// Given
 		List<String> todos = Arrays.asList("Learn Spring MVC", "Learn Spring", "Learn to dance");
 		given(todoServiceMock.retrieveTodos(anyString())).willReturn(todos);
-		TodoBusinessImpl todoBusinessImpl = new TodoBusinessImpl(todoServiceMock);
 		
 		// When
 		todoBusinessImpl.deleteTodosNotRelatedToSpring(anyString());
@@ -65,7 +67,6 @@ class TodoBusinessImplTest {
 		// Given
 		List<String> todos = Arrays.asList("Learn Spring MVC", "Learn Spring", "Learn to dance");
 		given(todoServiceMock.retrieveTodos(anyString())).willReturn(todos);
-		TodoBusinessImpl todoBusinessImpl = new TodoBusinessImpl(todoServiceMock);
 		
 		// When
 		todoBusinessImpl.deleteTodosNotRelatedToSpring(anyString());
@@ -87,7 +88,6 @@ class TodoBusinessImplTest {
 		// Given
 		List<String> todos = Arrays.asList("Learn Spring MVC", "Learn Spring", "Learn to dance");
 		given(todoServiceMock.retrieveTodos(anyString())).willReturn(todos);
-		TodoBusinessImpl todoBusinessImpl = new TodoBusinessImpl(todoServiceMock);
 		
 		// When
 		todoBusinessImpl.deleteTodosNotRelatedToSpring(anyString());
@@ -107,7 +107,6 @@ class TodoBusinessImplTest {
 		// Given
 		List<String> todos = Arrays.asList("Learn to Rock", "Learn Spring", "Learn to dance");
 		given(todoServiceMock.retrieveTodos(anyString())).willReturn(todos);
-		TodoBusinessImpl todoBusinessImpl = new TodoBusinessImpl(todoServiceMock);
 		
 		// When
 		todoBusinessImpl.deleteTodosNotRelatedToSpring(anyString());
